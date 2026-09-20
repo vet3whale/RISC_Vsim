@@ -4,7 +4,12 @@ project(RISC-Vsim LANGUAGES CXX)
 
 add_executable(RISC-Vsim
     src/main.cpp
+    src/decoder/decoder.cpp
     src/decoder/i_type.cpp
+    src/decoder/r_type.cpp
+    src/decoder/s_type.cpp
+    src/decoder/b_type.cpp
+    src/decoder/j_type.cpp
 )
 
 target_include_directories(RISC-Vsim PRIVATE
