@@ -28,15 +28,13 @@ int formatInstruction(uint32_t word, unsigned int address, char* output, int buf
     if (!decodeInstruction(word, assembly, sizeof(assembly))) return 0;
 
     int length;
-    if (word == 0x00008067) {
-        // RET is JALR x0, x1, 0
+    if (word == 0x00008067) { // RET
+        // RET == JALR x0, x1, 0
         length = snprintf(output,bufferSize, "RET \t\t//JALR x0, x1, 0");
-    }
-    else if (word == 0x00000013) {
-        // NOP is ADDI x0, x0, 0
+    } else if (word == 0x00000013) {
+        // NOP == ADDI x0, x0, 0
         length = snprintf(output,bufferSize, "NOP \t\t//ADDI x0, x0, 0 ");
-    }
-    else {
+    } else {
         int immediate;
         if (sscanf(assembly, "JAL x0, %d", &immediate) == 1) {
             // J is JAL x0, immediate, and the sample prints its target address
@@ -122,15 +120,14 @@ int main(int argc, char* argv[]) {
             return printError("Unsupported instruction before RET.");
         }
 
-        // the sample uses CRLF between lines and no newline after the last line
-        if (!firstLine) outputFile << "\r\n";
+        if (!firstLine) {
+            outputFile << "\r\n";
+        }
         firstLine = 0;
-
+        
         if (dataSection) {
             // interpret the word as a signed 32 bit number
-            long long value = word;
-            if (word & 0x80000000) value -= 4294967296LL;
-
+            int32_t value = static_cast<int32_t>(word);
             outputFile << binary << "      \t" << address << '\t' << value;
         }
         else {

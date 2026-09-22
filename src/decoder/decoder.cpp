@@ -8,15 +8,15 @@ int decodeInstruction(uint32_t word, char* output, int bufferSize) {
     // optcode is in bits 0 to 6
     unsigned int optcode = word & 0x7F;
 
-    switch (optcode) {
-        case 0x13:
+    switch (optcode) { // with reference to ../cstruct_images/complete_struct.png
+        case 0b0010011:
             return decodeAddi(word, output, bufferSize) ||
                    decodeSlti(word, output, bufferSize);
-        case 0x03:
+        case 0b0000011:
             return decodeLw(word, output, bufferSize);
-        case 0x67:
+        case 0b1100111:
             return decodeJalr(word, output, bufferSize);
-        case 0x33:
+        case 0b0110011:
             return decodeAdd(word, output, bufferSize) ||
                    decodeSub(word, output, bufferSize) ||
                    decodeAnd(word, output, bufferSize) ||
@@ -25,14 +25,14 @@ int decodeInstruction(uint32_t word, char* output, int bufferSize) {
                    decodeSll(word, output, bufferSize) ||
                    decodeSrl(word, output, bufferSize) ||
                    decodeSlt(word, output, bufferSize);
-        case 0x23:
+        case 0b0100011:
             return decodeSw(word, output, bufferSize);
-        case 0x63:
+        case 0b1100011:
             return decodeBeq(word, output, bufferSize) ||
                    decodeBne(word, output, bufferSize) ||
                    decodeBlt(word, output, bufferSize) ||
                    decodeBge(word, output, bufferSize);
-        case 0x6F:
+        case 0b1101111:
             return decodeJal(word, output, bufferSize);
         default:
             return 0;
