@@ -2,8 +2,12 @@
 #define RISCV_DECODER_H
 
 #include <stdint.h>
+#include "riscv/instruction.h"
 
-int decodeInstruction(uint32_t word, char *output, int bufferSize);
+int decodeInstruction(uint32_t word, char *output, int bufferSize); // part 1
+
+// function overloading done here because we want a way to fill in the Instruction struct
+bool decodeInstruction(uint32_t word, uint32_t address, Instruction& result); // part 2
 
 // following are decoder functions for i_type
 int decodeAddi(uint32_t word, char *output, int bufferSize);
