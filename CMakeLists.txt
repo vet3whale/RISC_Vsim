@@ -10,11 +10,14 @@ add_executable(RISC-Vsim
     src/decoder/s_type.cpp
     src/decoder/b_type.cpp
     src/decoder/j_type.cpp
+    src/simulator/simulator.cpp
+    src/simulator/pipeline.cpp
+    src/simulator/trace.cpp
 )
 
 target_include_directories(RISC-Vsim PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_compile_features(RISC-Vsim PRIVATE cxx_std_11)
+target_compile_features(RISC-Vsim PRIVATE cxx_std_14)
 set_target_properties(RISC-Vsim PROPERTIES CXX_EXTENSIONS OFF)
