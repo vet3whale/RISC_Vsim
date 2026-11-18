@@ -109,30 +109,22 @@ RISC-Vsim/
 `decoder/` holds the specific decoder functions for the different commands in the instruction set.  
 
 ## Build and Run
-Configure the project, Read `CMakeLists.txt` and prepare build files inside `build/`:
+
 ```bash
+cd /home/vetri/RISC_Vsim
+
 cmake -S . -B build
-```
-
-Compile the code to create an executable:
-```bash
 cmake --build build
-```
 
-```bash
-./build/RISC-Vsim proj_files/fibonacci_input.txt output.txt dis
-cat output.txt
-```
+# Part 1
+./build/RISC-Vsim proj_files/part1/sample_input.txt part1_check.txt dis
+diff proj_files/part1/sample_output.txt part1_check.txt
 
-Complete:
-```bash
-cmake -S . -B build && cmake --build build
-./build/RISC-Vsim proj_files/fibonacci_input.txt output.txt dis
-cat output.txt
+# Part 2
+./build/RISC-Vsim proj_files/part1/fibonacci_input.txt part2_check.txt sim -T 0:40
+diff proj_files/part2/sample-out2.txt part2_check.txt
 ```
 
 ## References
 
 Waterman, A., & Asanović, K. (Eds.). (2017). *The RISC-V instruction set manual: Volume I: User-level ISA* (Document version 2.2). RISC-V Foundation. https://content.riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf
-
-[Local copy of the manual](proj_files/riscv-spec-v2.2.pdf)
